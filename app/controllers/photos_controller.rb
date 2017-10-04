@@ -41,6 +41,12 @@ class PhotosController < ApplicationController
     end
   end
 
+    def download_photo
+      photo = Photo.find(params[:format])
+      data = open(photo.image_url(:original))
+      send_data( data.read,filename: photo.title)
+    end
+
 
   private
    
